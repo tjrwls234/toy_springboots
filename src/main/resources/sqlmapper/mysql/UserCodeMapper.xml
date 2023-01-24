@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserCode">
+
+<!-- call UserCode.selectList-->
+<select id="selectList" parameterType="Map" resultType="Map">
+    SELECT *
+    FROM users_list
+</select>
+
+<!-- call UserCode.selectList -->
+<select id="selectByUID" parameterType="Map" resultType="Map">
+    SELECT *
+    FROM users_list
+    WHERE USERS_UID = #{USERS_UID}
+</select>
+
+<!-- call UserCode.updateByUID -->
+<update id="updateByUID" parameterType="Map">
+    UPDATE users_list
+    SET NAME=#{NAME}, EMAIL1=#{EMAIL1}, EMAIL2=#{EMAIL2},
+    PHONE=#{PHONE}, PHONE2=#{PHONE2}, PHONE3=#{PHONE3},
+    ADDRESS=#{ADDRESS}, ADDRESS_ADD=#{ADDRESS_ADD}, MODIFY_DATE=sysdate()
+    WHERE USERS_UID = #{USERS_UID}
+</update>
+
+<!-- call UserCode.deleteByUID -->
+<delete id="deleteByUID" parameterType="Map">
+    DELETE FROM users_list
+    WHERE USERS_UID = #{USERS_UID}
+</delete>
+
+<!-- call UserCode.inserWithUID -->
+<insert id="inserWithUID" parameterType="Map">
+    INSERT into users_list 
+    (USERS_UID,NAME,PASSWORD,EMAIL1,EMAIL2,PHONE,
+    PHONE2,PHONE3,ADDRESS,ADDRESS_ADD,REGISTRY_DATE, MODIFY_DATE) 
+    VALUE( #{USERS_UID}, #{NAME}, #{PASSWORD}, #{EMAIL1}, #{EMAIL2},#{PHONE},
+    #{PHONE2},#{PHONE3},#{ADDRESS},#{ADDRESS_ADD}, sysdate(), sysdate())
+</insert>
+
+
+</mapper>
